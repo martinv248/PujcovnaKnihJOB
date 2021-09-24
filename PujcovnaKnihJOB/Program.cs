@@ -29,7 +29,6 @@ namespace PujcovnaKnihJOB
                 Console.WriteLine("----- PujcovnaKnihJOB -----");
                 Console.WriteLine("Hangfire Server started.");
                 RecurringJob.AddOrUpdate(() => p.svc.checkBooks(), Cron.Minutely);
-                Console.ReadKey();
                 bool showMenu = true;
                 while (showMenu)
                 {
