@@ -97,7 +97,7 @@ namespace PujcovnaKnihJOB.Services
                 Email.DefaultRenderer = new RazorRenderer();
 
                 var email = await Email
-                    .From("martin@martin.com")
+                    .From("admin@pujcovnaknih.com")
                     .To(user.Email)
                     .Subject("Děkujeme, že jste si půjčili naši knihu!")
                     .UsingTemplate(template.ToString(), new { FName = user.FName, LName = user.LName, BookTitle = book.Title, OrderID = order.ID, Price = book.Price, 
