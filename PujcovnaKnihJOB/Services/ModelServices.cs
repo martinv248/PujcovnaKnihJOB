@@ -107,7 +107,7 @@ namespace PujcovnaKnihJOB.Services
                 order.InvoiceDate = DateTime.Now;
                 db.Entry(order).State = EntityState.Modified;
             }
-            //db.SaveChanges();
+            db.SaveChanges();
         }
     }
 }
