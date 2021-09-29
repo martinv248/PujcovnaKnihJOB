@@ -18,7 +18,7 @@ namespace PujcovnaKnihJOB
     {
         private ModelServices svc = new ModelServices();
 
-        static async Task Main()
+        static void Main()
         {
             var p = new Program();
 
@@ -29,7 +29,6 @@ namespace PujcovnaKnihJOB
                 Console.WriteLine("----- PujcovnaKnihJOB -----");
                 Console.WriteLine("Hangfire Server started.");
                 RecurringJob.AddOrUpdate(() => p.svc.checkBooks(), Cron.Minutely);
-                Console.ReadKey();
                 bool showMenu = true;
                 while (showMenu)
                 {
@@ -47,7 +46,7 @@ namespace PujcovnaKnihJOB
             switch (Console.ReadLine())
             {
                 case "1":
-                    p.svc.invoiceRents().Wait();
+                    BackgroundJob.Enqueue(() => p.svc.invoiceRents().Wait());
                     return true;
                 case "2":
                     return false;
