@@ -3,7 +3,6 @@ using FluentEmail.Razor;
 using FluentEmail.Smtp;
 using PujcovnaKnihJOB.Models;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net.Mail;
@@ -33,7 +32,7 @@ namespace PujcovnaKnihJOB.Services
                     order.State = "Půjčena";
                     order.BorrowDate = DateTime.Now;
                     //Console.WriteLine("Titul: " + book.Title + " Status: " + book.IsAvailable + " Order state: " + order.State + " Date: " + order.BorrowDate);
-                    Console.WriteLine("Kniha " + book.Title + " byla zapůjčena");
+                    Console.WriteLine("Kniha byla zapůjčena: " + book.Title);
                     db.Entry(book).State = EntityState.Modified;
                     db.Entry(order).State = EntityState.Modified;    
                 } else if(order.State.Equals(returnState))
@@ -44,7 +43,7 @@ namespace PujcovnaKnihJOB.Services
                     order.State = "Vrácena";
                     order.ReturnDate = DateTime.Now;
                     //Console.WriteLine("Titul: " + book.Title + " Status: " + book.IsAvailable + " Order state: " + order.State + " Date: " + order.ReturnDate);
-                    Console.WriteLine("Kniha " + book.Title + "  byla vrácena");
+                    Console.WriteLine("Kniha byla vrácena: " + book.Title);
                     db.Entry(book).State = EntityState.Modified;
                     db.Entry(order).State = EntityState.Modified;
                 }
@@ -54,7 +53,7 @@ namespace PujcovnaKnihJOB.Services
 
         public async Task invoiceRents()
         {
-            var sender = new SmtpSender(() => new SmtpClient("localhost")
+            var sender = new SmtpSender(() => new SmtpClient("localhost")           // Pro testovani byl pouzit PaperCut
             {
                 EnableSsl = false,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
